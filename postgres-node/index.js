@@ -2,7 +2,7 @@ const { Client } = require("pg")
 const dotenv = require("dotenv")
 dotenv.config()
  
-const connectDb = async () => {
+const connectDb = async (query) => {
     try {
         const client = new Client({
             user: 'postgres',
@@ -13,7 +13,7 @@ const connectDb = async () => {
         })
  
         await client.connect()
-        const res = await client.query('SELECT * FROM t_party')
+        const res = await client.query(query)
         console.log(res)
         await client.end()
     } catch (error) {
@@ -21,4 +21,4 @@ const connectDb = async () => {
     }
 }
  
-connectDb()
+connectDb('SELECT * FROM t_party')
