@@ -6,6 +6,7 @@ const partyService = require('../services/partyService');
 router.get('/get/parties', async function(req, res, next) {
     console.log("/get/parties");
   console.log(req.query);
+  console.log("query after");
   try {
     res.json(await partyService.getParties());
   } catch (err) {
