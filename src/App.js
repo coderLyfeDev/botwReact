@@ -26,7 +26,7 @@ const App = () => {
         let partyList = [...party];
         partyList.push(newParty)
          setParty(partyList);
-         const response = await fetch("http://localhost:3032/botw-react/get/parties", {
+         const response = await fetch("http://3.82.220.33:3032/botw-react/get/parties", {
   headers: {
   'Accept': 'application/json, text/plain, */*',
   'Content-Type': 'application/json'
