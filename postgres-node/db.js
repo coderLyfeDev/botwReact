@@ -15,6 +15,7 @@ const connectDb = async (query) => {
         await client.connect()
         const res = await client.query(query)
         console.log(res)
+        return res.rows;
         await client.end()
     } catch (error) {
         console.log(error)
