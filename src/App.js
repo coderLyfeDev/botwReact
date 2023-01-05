@@ -33,6 +33,7 @@ const App = () => {
   }
   });
       const data = await response.json().then((d) => {
+        console.log("Printing data returned");
         console.log(d);
         //dispatch(UserProfileActions.login());
         //dispatch(UserProfileActions.signUp(d.data[0]));
