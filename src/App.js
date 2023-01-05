@@ -14,10 +14,10 @@ const App = () => {
   const [username, setusername] = useState("");
   const [party, setParty] = useState([]);
 
+  
 
-
-  function createParty() {
-  	//console.log(response)
+  async function createParty() {
+  	console.log("create party");
          let newParty = {
           "name": fname+" " + lname,
           "password": password,
@@ -26,6 +26,21 @@ const App = () => {
         let partyList = [...party];
         partyList.push(newParty)
          setParty(partyList);
+         const response = await fetch("http://localhost:3032/botw-react/get/parties", {
+  headers: {
+  'Accept': 'application/json, text/plain, */*',
+  'Content-Type': 'application/json'
+  }
+  });
+      const data = await response.json().then((d) => {
+        console.log(d);
+        //dispatch(UserProfileActions.login());
+        //dispatch(UserProfileActions.signUp(d.data[0]));
+        //getEducation(d.data[0].id);
+        //getWorkHistory(d.data[0].id);
+        //getCareerInterest(d.data[0].id);
+      return d;
+      });
   }
 
   return (

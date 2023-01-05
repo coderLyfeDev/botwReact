@@ -5,13 +5,11 @@ let userId = null;
 
 //  Get users
 async function getParties(){
-  const rows = await db.query('SELECT * FROM t_party');
+  const rows = await db.connectDb('SELECT * FROM t_party');
   const data = helper.emptyOrRows(rows);
-  const meta = {page};
 
   return {
     data,
-    meta
   }
 }
 

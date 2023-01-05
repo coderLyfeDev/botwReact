@@ -22,3 +22,6 @@ const connectDb = async (query) => {
 }
  
 //connectDb('SELECT * FROM t_party')
+module.exports = {
+    connectDb
+  }
