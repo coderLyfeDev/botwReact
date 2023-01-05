@@ -35,6 +35,7 @@ const App = () => {
       const data = await response.json().then((d) => {
         console.log("Printing data returned");
         console.log(d);
+        console.log("Printing data returned After");
         //dispatch(UserProfileActions.login());
         //dispatch(UserProfileActions.signUp(d.data[0]));
         //getEducation(d.data[0].id);
