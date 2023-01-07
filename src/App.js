@@ -41,7 +41,7 @@ const App = () => {
   
   async function createParty(party){
     console.log("create party");
-    const response = await fetch("http://localhost:3032/programming-languages/create/user", {
+    const response = await fetch("http://localhost:3032/botw-react/create/party", {
     method: 'POST',
     body: JSON.stringify(party),
     headers: {
