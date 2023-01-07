@@ -78,16 +78,6 @@ const App = () => {
     get parties
 </h1>
 <button onClick={getParties}>Create party</button>
-{party.map((p) => {
-    return (
-      <div key={p.username}>
-          <p><b>Name: </b>{p.name}</p>
-          <p><b>Username: </b>{p.username}</p>
-          <p><b>Password: </b>{p.password}</p>
-      </div>
-    );
-  })
-}
 </div>
   )
 }
