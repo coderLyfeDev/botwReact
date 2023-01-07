@@ -6,43 +6,54 @@ const myAPI = "botwRestAPI"
 const path = '/users/get'; 
 
 const App = () => {
-  const [input, setInput] = useState("")
-  const [customers, setCustomers] = useState([])
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [password, setPassword] = useState("");
   const [username, setusername] = useState("");
-  const [party, setParty] = useState([]);
-
   
 
-  async function createParty() {
-  	console.log("create party");
-         let newParty = {
-          "name": fname+" " + lname,
-          "password": password,
-          "username": username
-        };
-        let partyList = [...party];
-        partyList.push(newParty)
-         setParty(partyList);
-         const response = await fetch("http://3.82.220.33:3032/botw-react/get/parties", {
+  async function getParties() {
+  	console.log("get parties");
+
+    const response = await fetch("http://3.82.220.33:3032/botw-react/get/parties", {
   headers: {
   'Accept': 'application/json, text/plain, */*',
   'Content-Type': 'application/json'
   }
   });
       const data = await response.json().then((d) => {
-        console.log("Printing data returned");
         console.log(d);
-        console.log("Printing data returned After");
-        //dispatch(UserProfileActions.login());
-        //dispatch(UserProfileActions.signUp(d.data[0]));
-        //getEducation(d.data[0].id);
-        //getWorkHistory(d.data[0].id);
-        //getCareerInterest(d.data[0].id);
       return d;
       });
+  }
+
+  function createPartyHandler(event){
+    console.log("create party handler");
+    event.preventDefault();
+  
+    let party = {
+      name: fname+" "+lname,
+      password:password,
+      username:username
+  };
+      createParty(party);
+  }
+  
+  async function createParty(party){
+    console.log("create party");
+    const response = await fetch("http://localhost:3032/programming-languages/create/user", {
+    method: 'POST',
+    body: JSON.stringify(party),
+    headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json'
+    }
+    });
+        const data = await response.json();
+        const [message, newUser] = data
+        console.log(message);
+        console.log(newUser);
+        return newUser;
   }
 
   return (
@@ -62,10 +73,11 @@ const App = () => {
   <input placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
 </div>      
 <br/>
-  <button onClick={createParty}>Create party</button>
+  <button onClick={createPartyHandler}>Create party</button>
 <h1>
-    Created party
+    get parties
 </h1>
+<button onClick={getParties}>Create party</button>
 {party.map((p) => {
     return (
       <div key={p.username}>

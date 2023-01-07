@@ -13,6 +13,16 @@ async function getParties(){
   }
 }
 
+//  Create party
+async function createParty(party){
+    const rows = await db.connectDb(`INSERT INTO t_party(id, name, password, username) VALUES(default, '${party.name}','${party.password}', '${party.username}');`);
+    const data = helper.emptyOrRows(rows);
+  
+    return {
+      data,
+    }
+  }
+
 
 module.exports = {
   getParties
