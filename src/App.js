@@ -49,11 +49,11 @@ const App = () => {
     'Content-Type': 'application/json'
     }
     });
-        const data = await response.json();
-        const [message, newUser] = data
-        console.log(message);
-        console.log(newUser);
-        return newUser;
+        //const data = await response.json();
+        //const [message, newUser] = data
+        //console.log(message);
+        //console.log(newUser);
+        //return newUser;
   }
 
   return (

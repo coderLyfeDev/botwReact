@@ -25,5 +25,6 @@ async function createParty(party){
 
 
 module.exports = {
-  getParties
+  getParties,
+  createParty
 }
