@@ -16,7 +16,7 @@ router.get('/get/parties', async function(req, res, next) {
 });
 
 /* Create party.  */
-router.get('/create/party', async function(req, res, next) {
+router.post('/create/party', async function(req, res, next) {
     console.log("/create/parties");
   console.log(req);
   try {
