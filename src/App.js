@@ -4,24 +4,26 @@ import React, { useEffect, useState } from 'react'
 
 const myAPI = "botwRestAPI"
 const path = '/users/get'; 
-
+const localhost = 'http://54.165.250.197';
 const App = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [password, setPassword] = useState("");
   const [username, setusername] = useState("");
+  const [parties, setParties] = useState([]);
   
 
   async function getParties() {
   	console.log("get parties");
 
-    const response = await fetch("http://3.82.220.33:3032/botw-react/get/parties", {
+    const response = await fetch(localhost+":3032/botw-react/get/parties", {
   headers: {
   'Accept': 'application/json, text/plain, */*',
   'Content-Type': 'application/json'
   }
   });
       const data = await response.json().then((d) => {
+        setParties(d);
         console.log(d);
       return d;
       });
@@ -41,7 +43,7 @@ const App = () => {
   
   async function createParty(party){
     console.log("create party");
-    const response = await fetch("http://3.82.220.33:3032/botw-react/create/party", {
+    const response = await fetch(localhost+":3032/botw-react/create/party", {
     method: 'POST',
     body: JSON.stringify(party),
     headers: {
@@ -78,6 +80,15 @@ const App = () => {
     get parties
 </h1>
 <button onClick={getParties}>Create party</button>
+{parties.map((p) => {
+            return (
+              <div key={p.username}>
+                  <p><b>Name: </b>{p.name}</p>
+                  <p><b>Username: </b>{p.username}</p>
+              </div>
+            );
+          })
+        }
 </div>
   )
 }

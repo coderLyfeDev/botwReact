@@ -3,7 +3,7 @@ const app = express();
 const port = 3032;
 const cors = require('cors');
 const fetch = require('node-fetch');
-
+const localhost = 'http://54.165.250.197';
 const controller = require("./routes/controller");
 app.use(express.json());
 app.use(
@@ -13,7 +13,7 @@ app.use(
 );
 app.use(cors());
 const corsOptions = {
-    origin: "http://3.82.220.33:3032"
+    origin: localhost+":3032"
 };
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
@@ -27,5 +27,5 @@ app.use((err, req, res, next) => {
   return;
 });
 app.listen(port, () => {
-  console.log(`Example app listening at http://3.82.220.33:${port}`);
+  console.log(`Example app listening at `+localhost+`:${port}`);
 });
