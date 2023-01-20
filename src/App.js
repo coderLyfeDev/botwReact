@@ -23,7 +23,7 @@ const App = () => {
   }
   });
       const data = await response.json().then((d) => {
-        setParties(d);
+        setParties(d.data);
         console.log(d);
       return d;
       });
@@ -80,15 +80,14 @@ const App = () => {
     get parties
 </h1>
 <button onClick={getParties}>Create party</button>
-{parties.map((p) => {
+<table><tr><td><h3>Name</h3></td><td><h3>Username</h3></td></tr>
+          {parties.map((p) => {
             return (
-              <div key={p.username}>
-                  <p><b>Name: </b>{p.name}</p>
-                  <p><b>Username: </b>{p.username}</p>
-              </div>
+                    <tr><td>{p.name}</td><td>{p.username}</td></tr>
             );
           })
         }
+</table>
 </div>
   )
 }
