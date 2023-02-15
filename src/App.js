@@ -4,21 +4,27 @@ import React, { useEffect, useState } from 'react'
 
 const myAPI = "botwRestAPI"
 const path = '/users/get'; 
-const localhost = 'http://44.202.136.145';
+const localhost = 'http://localhost';
 const App = () => {
+  const [productId, setProductId] = useState("");
+  const [applicationStatus, setApplicationStatus] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setusername] = useState("");
-  const [parties, setParties] = useState([]);
+  const [email, setEmail] = useState([]);
+  const [street, setStreet] = useState([]);
+  const [city, setCity] = useState([]);
+  const [state, setState] = useState([]);
+  const [zip, setZip] = useState([]);
+
+
   
 
   async function getParties() {
-  	console.log("get parties");
+  	/*console.log("get parties");
 
     const response = await fetch(localhost+":3032/botw-react/get/parties", {
   headers: {
-  'Accept': 'application/json, text/plain, */*',
+  'Accept': '',
   'Content-Type': 'application/json'
   }
   });
@@ -26,26 +32,41 @@ const App = () => {
         setParties(d.data);
         console.log(d);
       return d;
-      });
+      });*/
   }
 
-  function createPartyHandler(event){
-    console.log("create party handler");
+  function createApplicationHandler(event){
+    console.log("create application handler");
     event.preventDefault();
-  
-    let party = {
-      name: fname+" "+lname,
-      password:password,
-      username:username
+
+    const address = {
+      city:city,
+      state:state,
+      street: street,
+      zip:zip
+    }
+
+    let customer = {
+      firstName: fname,
+      lastName:lname,
+      email:email,
+      address: address
   };
-      createParty(party);
+
+  const application = {
+    productId: productId,
+    applicationStatus:applicationStatus,
+    customer:customer,
+    address:address
+  }
+      createApplication(application);
   }
   
-  async function createParty(party){
-    console.log("create party");
-    const response = await fetch(localhost+":3032/botw-react/create/party", {
+  async function createApplication(application){
+    console.log("create application");
+    const response = await fetch(localhost+":3032/botw-react/create/application", {
     method: 'POST',
-    body: JSON.stringify(party),
+    body: JSON.stringify(application),
     headers: {
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json'
@@ -61,32 +82,47 @@ const App = () => {
   return (
     
 <div>
-<h1>POST Request</h1>
-<div>
-  <input placeholder="user name" type="text" value={username} onChange={(e) => setusername(e.target.value)}/>
-</div>
+<h1>Create Application</h1>
 <div>
   <input placeholder="first name" type="text" value={fname} onChange={(e) => setFname(e.target.value)}/>
 </div>
 <div>      
   <input placeholder="last name" type="text" value={lname} onChange={(e) => setLname(e.target.value)}/>
 </div>
+<div>
+  <input placeholder="Email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+</div>
 <div>      
-  <input placeholder="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
-</div>      
+  <input placeholder="product ID" type="text" value={productId} onChange={(e) => setProductId(e.target.value)}/>
+</div>  
+<div>      
+  <input placeholder="application Status" type="text" value={applicationStatus} onChange={(e) => setApplicationStatus(e.target.value)}/>
+</div>  
+<div>      
+  <input placeholder="street" type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
+</div>  
+<div>      
+  <input placeholder="city" type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
+</div> 
+<div>      
+  <input placeholder="state" type="text" value={state} onChange={(e) => setState(e.target.value)}/>
+</div> 
+<div>      
+  <input placeholder="Zip Code" type="number" value={zip} onChange={(e) => setZip(e.target.value)}/>
+</div>  
 <br/>
-  <button onClick={createPartyHandler}>Create party</button>
+  <button onClick={createApplicationHandler}>Create Application</button>
 <h1>
     get parties
 </h1>
 <button onClick={getParties}>Create party</button>
 <table><tr><td><h3>Name</h3></td><td><h3>Username</h3></td></tr>
-          {parties.map((p) => {
+          {/*parties.map((p) => {
             return (
                     <tr><td>{p.name}</td><td>{p.username}</td></tr>
             );
           })
-        }
+        */}
 </table>
 </div>
   )

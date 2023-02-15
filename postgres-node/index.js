@@ -3,7 +3,7 @@ const app = express();
 const port = 3032;
 const cors = require('cors');
 const fetch = require('node-fetch');
-const localhost = 'http://44.202.136.145';
+const localhost = 'http://localhost';
 const controller = require("./routes/controller");
 app.use(express.json());
 app.use(
