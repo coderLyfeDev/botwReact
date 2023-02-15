@@ -65,19 +65,22 @@ const App = () => {
   
   async function createApplication(application){
     console.log("create application");
-    const response = await fetch(localhost+":3032/botw-react/create/application", {
+    console.log(application);
+    const response = await fetch("https://ll785aqlqi.execute-api.us-east-1.amazonaws.com/dev/applications", {
     method: 'POST',
     body: JSON.stringify(application),
     headers: {
     'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    "access-control-allow-origin" : "*"
     }
     });
-        //const data = await response.json();
+        const [status, applicationId, workflowId] = await response.json();
         //const [message, newUser] = data
-        //console.log(message);
-        //console.log(newUser);
-        //return newUser;
+        console.log(status);
+        console.log(applicationId);
+        console.log(workflowId);
+
   }
 
   return (
