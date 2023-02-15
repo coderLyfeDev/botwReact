@@ -8,8 +8,6 @@ const networkInterfaces = os.networkInterfaces();
 const ipAddress = networkInterfaces['eth0'][0].address; // replace eth0 with the interface name that you want to use
 console.log(ipAddress);
 const localhost = 'http://'+ipAddress;
-
-const localhost = 'http://'+ipAddress;
 const controller = require("./routes/controller");
 app.use(express.json());
 app.use(
