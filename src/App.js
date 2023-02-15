@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 const myAPI = "botwRestAPI"
 const path = '/users/get'; 
-const localhost = 'http://44.202.136.145';
+const localhost = 'http://18.233.161.163';
 const App = () => {
   const [productId, setProductId] = useState("");
   const [applicationStatus, setApplicationStatus] = useState("");
