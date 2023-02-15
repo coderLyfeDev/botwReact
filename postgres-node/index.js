@@ -3,7 +3,13 @@ const app = express();
 const port = 3032;
 const cors = require('cors');
 const fetch = require('node-fetch');
-const localhost = 'http://3.84.54.243';
+const os = require('os');
+const networkInterfaces = os.networkInterfaces();
+const ipAddress = networkInterfaces['eth0'][0].address; // replace eth0 with the interface name that you want to use
+console.log(ipAddress);
+const localhost = 'http://'+ipAddress;
+
+const localhost = 'http://'+ipAddress;
 const controller = require("./routes/controller");
 app.use(express.json());
 app.use(
