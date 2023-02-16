@@ -38,5 +38,11 @@
 }
 
 body{
-  background-color: green;
+  background-color: white;
+}
+
+.createApplication{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

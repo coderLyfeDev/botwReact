@@ -73,7 +73,7 @@ const App = () => {
     headers: {
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json',
-    "access-control-allow-origin" : "*"
+    "Access-Control-Allow-Origin" : "*"
     }
     });
         const [status, applicationId, workflowId] = await response.json();
@@ -87,6 +87,8 @@ const App = () => {
   return (
     
 <div>
+  <div className="createApplication">
+  <form>
 <h1>Create Application</h1>
 <div>
   <input placeholder="Email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
@@ -117,8 +119,9 @@ const App = () => {
 </div>  
 <br/>
   <button onClick={createApplicationHandler}>Create Application</button>
-<h1>
-    get parties
+  </form>
+  <h1>
+    Retrieve Applications
 </h1>
 <button onClick={getParties}>Create party</button>
 <table><tr><td><h3>Name</h3></td><td><h3>Username</h3></td></tr>
@@ -129,6 +132,9 @@ const App = () => {
           })
         }
 </table>
+  </div>
+
+
 </div>
   )
 }
