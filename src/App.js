@@ -76,11 +76,11 @@ const App = () => {
     "Access-Control-Allow-Origin" : "*"
     }
     });
-        const [status, applicationId, workflowId] = await response.json();
+        //const [status, applicationId, workflowId] = await response.json();
         //const [message, newUser] = data
-        console.log(status);
-        console.log(applicationId);
-        console.log(workflowId);
+        //console.log(status);
+        //console.log(applicationId);
+        //console.log(workflowId);
 
   }
 
