@@ -73,14 +73,14 @@ const App = () => {
     headers: {
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin" : "*"
+    "access-control-allow-origin" : "*"
     }
-    });
-        //const [status, applicationId, workflowId] = await response.json();
+    })
+        const [status, applicationId, workflowId] = await response.json();
         //const [message, newUser] = data
-        //console.log(status);
-        //console.log(applicationId);
-        //console.log(workflowId);
+        console.log(status);
+        console.log(applicationId);
+        console.log(workflowId);
 
   }
 
