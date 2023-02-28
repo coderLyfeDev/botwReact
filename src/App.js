@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useEffect, useState } from 'react'
-
+import React, { useState } from 'react'
+import axios from 'axios';
 const ipAddress = window.location.hostname;
 const myAPI = "botwRestAPI"
 const path = '/users/get'; 
@@ -51,8 +51,7 @@ const App = () => {
     let customer = {
       firstName: fname,
       lastName:lname,
-      email:email,
-      address: address
+      email:email
   };
 
   const application = {
@@ -63,76 +62,78 @@ const App = () => {
   }
       createApplication(application);
   }
-  
-  async function createApplication(application){
-    console.log("create application");
-    console.log(application);
-    const response = await fetch("https://ll785aqlqi.execute-api.us-east-1.amazonaws.com/dev/applications", {
-    method: 'POST',
-    body: JSON.stringify(application),
-    headers: {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json',
-    "access-control-allow-origin" : "*"
-    }
-    })
-        const [status, applicationId, workflowId] = await response.json();
-        //const [message, newUser] = data
-        console.log(status);
-        console.log(applicationId);
-        console.log(workflowId);
 
+  async function createApplication(application){
+    console.log("create app!");
+    console.log(JSON.stringify(application));
+    const api = 'https://d0jgdwdab2.execute-api.us-east-1.amazonaws.com/corsStage/';
+    
+    axios
+      .post(api, application)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
     
 <div>
-  <div className="createApplication">
-  <form>
-<h1>Create Application</h1>
-<div>
-  <input placeholder="Email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-</div>
-<div>
-  <input placeholder="first name" type="text" value={fname} onChange={(e) => setFname(e.target.value)}/>
-</div>
-<div>      
-  <input placeholder="last name" type="text" value={lname} onChange={(e) => setLname(e.target.value)}/>
-</div>
-<div>      
-  <input placeholder="product ID" type="text" value={productId} onChange={(e) => setProductId(e.target.value)}/>
-</div>  
-<div>      
-  <input placeholder="application Status" type="text" value={applicationStatus} onChange={(e) => setApplicationStatus(e.target.value)}/>
-</div>  
-<div>      
-  <input placeholder="street" type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
-</div>  
-<div>      
-  <input placeholder="city" type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
-</div> 
-<div>      
-  <input placeholder="state" type="text" value={state} onChange={(e) => setState(e.target.value)}/>
-</div> 
-<div>      
-  <input placeholder="Zip Code" type="number" value={zip} onChange={(e) => setZip(e.target.value)}/>
-</div>  
-<br/>
-  <button onClick={createApplicationHandler}>Create Application</button>
-  </form>
-  <h1>
-    Retrieve Applications
-</h1>
-<button onClick={getParties}>Create party</button>
-<table><tr><td><h3>Name</h3></td><td><h3>Username</h3></td></tr>
-          {parties.map((p) => {
-            return (
-                    <tr><td>{p.name}</td><td>{p.username}</td></tr>
-            );
-          })
-        }
-</table>
-  </div>
+  <p className="header">Bank Co.</p>
+  <div className="centerAlign">
+    <form>
+      <h1>Create Application</h1>
+      <div className="form-div">
+        <div>
+        <input placeholder="Email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        </div>
+        <div>
+        <input placeholder="first name" type="text" value={fname} onChange={(e) => setFname(e.target.value)}/>
+        </div>
+        <div>      
+        <input placeholder="last name" type="text" value={lname} onChange={(e) => setLname(e.target.value)}/>
+        </div>
+        <div>      
+        <input placeholder="product ID" type="text" value={productId} onChange={(e) => setProductId(e.target.value)}/>
+        </div>  
+        <div>      
+        <input placeholder="application Status" type="text" value={applicationStatus} onChange={(e) => setApplicationStatus(e.target.value)}/>
+        </div>  
+        <div>      
+        <input placeholder="street" type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
+        </div>  
+        <div>      
+        <input placeholder="city" type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
+        </div> 
+        <div>      
+        <input placeholder="state" type="text" value={state} onChange={(e) => setState(e.target.value)}/>
+        </div> 
+        <div>      
+        <input placeholder="Zip Code" type="number" value={zip} onChange={(e) => setZip(e.target.value)}/>
+        </div>  
+        <br/>
+        <button onClick={createApplicationHandler}>Create Application</button>
+      </div>
+    </form>
+    </div>
+    <div className="centerAlign">
+      <form>
+      <h1>Retrieve Applications</h1>
+      <div className="form-div">
+        <button onClick={getParties}>Retrieve Applications</button>
+        <table><tr><td><h3>Name</h3></td><td><h3>Username</h3></td></tr>
+                {parties.map((p) => {
+                  return (
+                          <tr><td>{p.name}</td><td>{p.username}</td></tr>
+                  );
+                })
+              }
+        </table>
+      </div>
+      </form>
+    </div>
 
 
 </div>

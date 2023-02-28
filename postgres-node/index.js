@@ -19,6 +19,7 @@ app.use(cors());
 const corsOptions = {
     origin: localhost+":3032"
 };
+
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
