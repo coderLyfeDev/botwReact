@@ -7,7 +7,7 @@ const myAPI = "botwRestAPI"
 const path = '/users/get'; 
 const localhost = 'http://'+ipAddress;
 const App = () => {
-  const [productId, setProductId] = useState("Select Product ID");
+  const [productId, setProductId] = useState("Premier Checking");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -105,10 +105,7 @@ const App = () => {
         </div>
         <div>      
         <select id="dropdown" value={productId} onChange={handleChange}>
-        <option value="">Select Product ID</option>
-        <option value="Option 1">Option 1</option>
-        <option value="Option 2">Option 2</option>
-        <option value="Option 3">Option 3</option>
+        <option value="Premier Checking">Premier Checking</option>
       </select>
         </div>  
         <div>      
