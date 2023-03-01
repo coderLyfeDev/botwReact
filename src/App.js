@@ -16,25 +16,22 @@ const App = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
-  const [parties, setParties] = useState([]);
+  const [application, setApplication] = useState(null);
 
-
+  async function getApplications(appId) {
+  console.log("get Applications");
+  const api = 'https://0k9a76n47e.execute-api.us-east-1.amazonaws.com/dev/applications/'+appId;
+    
+  axios
+    .get(api)
+    .then((response) => {
+      console.log(response.data.body);
+      setApplication(response.data.body);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   
-
-  async function getParties() {
-  	console.log("get parties");
-
-    const response = await fetch(localhost+":3032/botw-react/get/parties", {
-  headers: {
-  'Accept': 'application/json, text/plain, */*',
-  'Content-Type': 'application/json'
-  }
-  });
-      const data = await response.json().then((d) => {
-        setParties(d.data);
-        console.log(d);
-      return d;
-      });
   }
 
   function createApplicationHandler(event){
@@ -54,24 +51,34 @@ const App = () => {
       email:email
   };
 
-  const application = {
+  const app = {
     productId: productId,
     applicationStatus:applicationStatus,
     customer:customer,
     address:address
   }
-      createApplication(application);
+      createApplication(app);
+      setProductId("");
+      setApplicationStatus("");
+      setEmail("");
+      setFname("");
+      setLname("");
+      setCity("");
+      setState("");
+      setZip("");
+      setStreet("");
   }
 
   async function createApplication(application){
     console.log("create app!");
     console.log(JSON.stringify(application));
-    const api = 'https://d0jgdwdab2.execute-api.us-east-1.amazonaws.com/corsStage/';
+    const api = 'https://0k9a76n47e.execute-api.us-east-1.amazonaws.com/dev/applications';
     
     axios
       .post(api, application)
       .then((response) => {
         console.log(response);
+        getApplications(response.data.applicationId);
       })
       .catch((error) => {
         console.log(error);
@@ -116,24 +123,12 @@ const App = () => {
         <br/>
         <button onClick={createApplicationHandler}>Create Application</button>
       </div>
+      {application && 
+        <div><p><b>Application ID:</b>&nbsp;{application.applicationId}</p><p><b>Application Status:</b>&nbsp;{application.applicationStatus}&nbsp;&nbsp;</p></div>
+        }
     </form>
     </div>
-    <div className="centerAlign">
-      <form>
-      <h1>Retrieve Applications</h1>
-      <div className="form-div">
-        <button onClick={getParties}>Retrieve Applications</button>
-        <table><tr><td><h3>Name</h3></td><td><h3>Username</h3></td></tr>
-                {parties.map((p) => {
-                  return (
-                          <tr><td>{p.name}</td><td>{p.username}</td></tr>
-                  );
-                })
-              }
-        </table>
-      </div>
-      </form>
-    </div>
+    
 
 
 </div>
