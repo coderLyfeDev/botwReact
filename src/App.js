@@ -7,8 +7,7 @@ const myAPI = "botwRestAPI"
 const path = '/users/get'; 
 const localhost = 'http://'+ipAddress;
 const App = () => {
-  const [productId, setProductId] = useState("");
-  const [applicationStatus, setApplicationStatus] = useState("");
+  const [productId, setProductId] = useState("Select Product ID");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -34,6 +33,10 @@ const App = () => {
   
   }
 
+  const handleChange = (event) => {
+    setProductId(event.target.value);
+  }
+
   function createApplicationHandler(event){
     console.log("create application handler");
     event.preventDefault();
@@ -53,13 +56,11 @@ const App = () => {
 
   const app = {
     productId: productId,
-    applicationStatus:applicationStatus,
     customer:customer,
     address:address
   }
       createApplication(app);
       setProductId("");
-      setApplicationStatus("");
       setEmail("");
       setFname("");
       setLname("");
@@ -103,10 +104,12 @@ const App = () => {
         <input placeholder="last name" type="text" value={lname} onChange={(e) => setLname(e.target.value)}/>
         </div>
         <div>      
-        <input placeholder="product ID" type="text" value={productId} onChange={(e) => setProductId(e.target.value)}/>
-        </div>  
-        <div>      
-        <input placeholder="application Status" type="text" value={applicationStatus} onChange={(e) => setApplicationStatus(e.target.value)}/>
+        <select id="dropdown" value={productId} onChange={handleChange}>
+        <option value="">Select Product ID</option>
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </select>
         </div>  
         <div>      
         <input placeholder="street" type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
