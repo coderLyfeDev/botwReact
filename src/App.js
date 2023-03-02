@@ -33,6 +33,23 @@ const App = () => {
   
   }
 
+  async function refreshStatus() {
+    console.log("Refresh");
+    
+    const api = 'https://0k9a76n47e.execute-api.us-east-1.amazonaws.com/dev/applications/'+application.applicationId;
+      
+    axios
+      .get(api)
+      .then((response) => {
+        console.log(response.data.body);
+        setApplication(response.data.body);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      console.log(application.applicationStatus);
+    }
+
   const handleChange = (event) => {
     setProductId(event.target.value);
   }
@@ -79,6 +96,7 @@ const App = () => {
       .post(api, application)
       .then((response) => {
         console.log(response);
+        setApplication(response.data.applicationId);
         getApplications(response.data.applicationId);
       })
       .catch((error) => {
@@ -126,11 +144,15 @@ const App = () => {
       {application && 
         <div><p><b>Application ID:</b>&nbsp;{application.applicationId}</p><p><b>Application Status:</b>&nbsp;{application.applicationStatus}&nbsp;&nbsp;</p></div>
         }
+        
     </form>
-    </div>
     
-
-
+    </div>
+    <br></br><br></br><br></br>
+    {application &&
+    <div className="centerAlign refresh">
+      <button onClick={refreshStatus}>Refresh status</button>
+    </div>}
 </div>
   )
 }
